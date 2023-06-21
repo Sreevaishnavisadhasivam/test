@@ -1,0 +1,9 @@
+# .gitlab-ci.yml
+
+stages:
+  - build
+ 
+job1:
+  stage: build
+  script:
+    - echo "Building the application..."
