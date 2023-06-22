@@ -30,13 +30,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v2
         with:
           java-version: 11
-          distribution: adopt
 
       - name: Build and test
         run: |
@@ -50,22 +49,23 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: actions/github-script@v5
         with:
-          script: |
-            const response = await github.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              base: 'main',
-              head: context.sha
-            });
+        script: |
+         try {
+          const response = await github.pulls.list({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          state: 'open',
+          base: 'main',
+          head: context.sha
+           });
 
-            const prs = response.data;
-            if (prs.length > 0) {
-              core.setFailed('There are open pull requests targeting this branch. Manual approval is required.');
-            }
+          const prs = response.data;
+         if (prs.length > 0) {
+          core.setFailed('There are open pull requests targeting this branch. Manual approval is required.');
+          }
+          } catch (error) {
+        core.setFailed(`Error occurred: ${error.message}`);
+      }
+     
 
-      - name: Deploy to production
-        if: success() && github.ref == 'refs/heads/main'
-        run: |
-          # Add deployment steps to deploy to production environment
      
