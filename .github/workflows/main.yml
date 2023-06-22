@@ -47,22 +47,19 @@ jobs:
           git config --global user.name "Sreevaishnavisadhasivam"
           git config --global user.email "sreevaishnavi2002@gmail.com"
 
-      - name: Check out gh-pages branch
-        run: git checkout -B gh-pages
-
-      - name: Add changes
-        run: git add .
-
-      - name: Commit changes
-        run: git commit -m "Update gh-pages"
-
-      - name: Set remote origin
-        run: git remote add origin "https://github.com/Sreevaishnavisadhasivam/test.git"
+      - name: Check if remote origin exists
+        run: |
+          if ! git remote show origin; then
+            git remote add origin "https://github.com/Sreevaishnavisadhasivam/test.git"
+          else
+            git remote set-url origin "https://github.com/Sreevaishnavisadhasivam/test.git"
+          fi
 
       - name: Push to gh-pages branch
         run: git push origin gh-pages
         env:
           ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
 
   
      
