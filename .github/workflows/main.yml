@@ -42,22 +42,18 @@ jobs:
         run: |
           mvn clean install
 
-      manual-approval:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Manual approval for production deployment
+      - name: Push to gh-pages
         run: |
-          response=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-                      -H "Accept: application/vnd.github.v3+json" \
-                      "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&base=main&head=${{ github.sha }}")
-          
-          prs=$(echo "$response" | jq length)
-          
-          if [[ $prs -gt 0 ]]; then
-            echo "There are open pull requests targeting this branch. Manual approval is required."
-            exit 1
-          fi
+          git config --global user.name "Sreevaishnavisadhasivam"
+          git config --global user.email "sreevaishnavi2002@gmail.com"
+          git checkout gh-pages
+          git add .
+          git commit -m "Update gh-pages"
+          git remote remove origin
+          git remote add origin "https://github.com/Sreevaishnavisadhasivam/test.git"
+          git push origin gh-pages
+          env:
+          ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
   
      
