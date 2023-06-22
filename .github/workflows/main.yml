@@ -55,10 +55,7 @@ jobs:
             git remote set-url origin "https://github.com/Sreevaishnavisadhasivam/test.git"
           fi
 
-      - name: Push to gh-pages branch
-        run: git push origin gh-pages
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      
 
 
   
