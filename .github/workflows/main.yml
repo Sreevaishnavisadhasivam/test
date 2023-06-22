@@ -54,6 +54,16 @@ jobs:
           else
             git remote set-url origin "https://github.com/Sreevaishnavisadhasivam/test.git"
           fi
+          
+          - name: Deploy to gh-pages
+          run: |
+          # Add commands to build and deploy your website
+          # ...
+
+          # Copy redirect.html to the deployment directory
+          cp redirect.html
+
+
 
       
 
