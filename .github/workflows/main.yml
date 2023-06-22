@@ -61,7 +61,7 @@ jobs:
           # ...
 
           # Copy redirect.html to the deployment directory
-          cp redirect.html .
+          cp ./redirect.html
 
 
 
