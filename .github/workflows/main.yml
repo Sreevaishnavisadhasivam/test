@@ -58,7 +58,7 @@ jobs:
       - name: Push to gh-pages branch
         run: git push origin gh-pages
         env:
-          ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
 
   
