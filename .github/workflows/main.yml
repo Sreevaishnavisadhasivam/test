@@ -25,3 +25,46 @@ jobs:
 
       - name: Run tests
         run: mvn test -Dtest=CalculatorTest
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+
+      - name: Build and test
+        run: |
+          mvn clean install
+
+      - name: Deploy to staging
+        run: |
+          # Add deployment steps to deploy to staging environment
+
+      - name: Manual approval for production deployment
+        if: github.ref == 'refs/heads/main'
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const response = await github.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              base: 'main',
+              head: context.sha
+            });
+
+            const prs = response.data;
+            if (prs.length > 0) {
+              core.setFailed('There are open pull requests targeting this branch. Manual approval is required.');
+            }
+
+      - name: Deploy to production
+        if: success() && github.ref == 'refs/heads/main'
+        run: |
+          # Add deployment steps to deploy to production environment
+     
