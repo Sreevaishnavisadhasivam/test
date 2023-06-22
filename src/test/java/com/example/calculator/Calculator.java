@@ -2,7 +2,7 @@ package com.example.calculator.Calculator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class Calculator {
+public class CalculatorTest {
     
     @Test
     public void testAddition() {
