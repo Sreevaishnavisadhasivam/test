@@ -49,23 +49,23 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: actions/github-script@v5
         with:
-        script: |
-         try {
-          const response = await github.pulls.list({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          state: 'open',
-          base: 'main',
-          head: context.sha
-           });
+          script: |
+            const response = await github.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              base: 'main',
+              head: context.sha
+            });
 
-          const prs = response.data;
-         if (prs.length > 0) {
-          core.setFailed('There are open pull requests targeting this branch. Manual approval is required.');
-          }
-          } catch (error) {
-        core.setFailed(`Error occurred: ${error.message}`);
-      }
+            const prs = response.data;
+            if (prs.length > 0) {
+              core.setFailed('There are open pull requests targeting this branch. Manual approval is required.');
+            }
+
+      - name: Deploy to production
+        if: success() && github.ref == 'refs/heads/main'
+        run: |
      
 
      
