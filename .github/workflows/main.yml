@@ -58,11 +58,14 @@ jobs:
       - name: Deploy to gh-pages
         run: |
           # Add commands to build and deploy your website
-          # ...
-
-          # Copy redirect.html to the deployment directory
-          mkdir newfolder
-
+          # For example, if your built artifacts are in the 'target' directory
+          cp -R target/* redirect.html/
+        
+          # Commit and push the changes to gh-pages
+          git checkout gh-pages
+          git add .
+          git commit -m "Deploy new version"
+          git push origin gh-pages
 
 
       
