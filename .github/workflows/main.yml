@@ -81,7 +81,7 @@ jobs:
       - name: Open website
         run: |
           # Install Puppeteer
-          npm install puppeteer
+          npm install puppeteer@14.6.0 --unsafe-perm
 
           # Launch a headless Chrome browser and open the website
           npx puppeteer --no-sandbox --disable-setuid-sandbox -c "await page.goto('https://example.com');"
