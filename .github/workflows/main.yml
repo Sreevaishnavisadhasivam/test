@@ -78,7 +78,10 @@ jobs:
         run: |
           #add some command
           
-      - name: Visit website
+      - name: Open website
         run: |
-          # Replace 'https://example.com' with the URL of your deployed website
-          curl -LsS -o /dev/null -w "%{http_code}" https://cliq.zoho.com   
+          # Install Puppeteer
+          npm install puppeteer
+
+          # Launch a headless Chrome browser and open the website
+          npx puppeteer --no-sandbox --disable-setuid-sandbox -c "await page.goto('https://example.com');"
