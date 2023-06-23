@@ -81,4 +81,4 @@ jobs:
       - name: Visit website
         run: |
           # Replace 'https://example.com' with the URL of your deployed website
-          curl -LsS -o /dev/null -w "%{https://cliq.com}" https://example.com    
+          curl -LsS -o /dev/null -w "%{http_code}" https://cliq.zoho.com   
