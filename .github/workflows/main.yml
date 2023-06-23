@@ -78,11 +78,7 @@ jobs:
         run: |
           #add some command
           
-      - name: Open website
+      - name: On success
         run: |
-          # Install a headless browser, for example, Google Chrome
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-          # Launch the headless Chrome browser and open the website
-          google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 https://example.com
+          echo "successfully done"
+          
