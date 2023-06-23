@@ -1,30 +1,30 @@
-name: Java CI
- 
+name: Java CI/CD
+
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
-  build: 
+  build:
     runs-on: ubuntu-latest
 
-    steps:  
+    steps:
       - name: Checkout code
-        uses: actions/checkout@v3 
+        uses: actions/checkout@v3
 
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
-         java-version: 11
-         distribution: adopt
-
+          java-version: 11
+          distribution: adopt
 
       - name: Build with Maven
         run: mvn clean install
 
       - name: Run tests
         run: mvn test -Dtest=CalculatorTest
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -37,7 +37,7 @@ jobs:
         with:
           java-version: 11
           distribution: adopt
- 
+
       - name: Build and test
         run: |
           mvn clean install
@@ -47,37 +47,20 @@ jobs:
           git config --global user.name "Sreevaishnavisadhasivam"
           git config --global user.email "sreevaishnavi2002@gmail.com"
 
-      - name: Check if remote origin exists
+      - name: Create 'gh-pages' branch if it doesn't exist
         run: |
-          if ! git remote show origin; then
-            git remote add origin "https://github.com/Sreevaishnavisadhasivam/test.git"
-          else
-            git remote set-url origin "https://github.com/Sreevaishnavisadhasivam/test.git"
-          fi
-          
+          git show-ref --quiet refs/heads/gh-pages || git checkout --orphan gh-pages
+          git rm -rf .
+          git commit -m "Create 'gh-pages' branch" --allow-empty
+          git push --set-upstream origin gh-pages
+
       - name: Deploy to gh-pages
         run: |
           # Build your website or application
           # For example, if your built artifacts are in the 'dist' directory
-
-          # Clear the existing contents of the 'gh-pages' branch
-          git checkout gh-pages
-          git rm -rf .
-
-          # Copy the built artifacts to the 'gh-pages' branch
           cp -R dist/* .
 
           # Add, commit, and push the changes to the 'gh-pages' branch
           git add .
           git commit -m "Deploy new version"
           git push --force origin gh-pages
-
-
-
-      
-
-
-  
-     
-
-     
