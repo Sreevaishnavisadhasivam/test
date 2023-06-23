@@ -57,9 +57,20 @@ jobs:
           
       - name: Deploy to gh-pages
         run: |
-          # Add commands to build and deploy your website
-          # For example, if your built artifacts are in the 'target' directory
-          mkdir newfolder
+          # Build your website or application
+          # For example, if your built artifacts are in the 'dist' directory
+
+          # Clear the existing contents of the 'gh-pages' branch
+          git checkout gh-pages
+          git rm -rf .
+
+          # Copy the built artifacts to the 'gh-pages' branch
+          cp -R dist/* .
+
+          # Add, commit, and push the changes to the 'gh-pages' branch
+          git add .
+          git commit -m "Deploy new version"
+          git push --force origin gh-pages
 
 
 
