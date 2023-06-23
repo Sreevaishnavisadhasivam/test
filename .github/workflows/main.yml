@@ -64,3 +64,5 @@ jobs:
           git add .
           git commit -m "Deploy new version"
           git push --force origin gh-pages
+          env:
+          ACCESS_TOKEN: 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
