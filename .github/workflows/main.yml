@@ -63,23 +63,11 @@ jobs:
           # For example, if your built artifacts are in the 'target' directory
           cp -R target/* dist/
         
-          if ! git show-ref --quiet refs/heads/gh-pages; then
-          # Create the gh-pages branch
-          git checkout --orphan gh-pages
-          git rm -rf .
-          echo "My GitHub Page" > index.html
-          git add index.html
-          git commit -m "Create gh-pages branch"
-          git push origin gh-pages
-          else
-          # Switch to the existing gh-pages branch
-          git checkout gh-pages
-          fi
-
           # Commit and push the changes to gh-pages
+          git checkout gh-pages
           git add .
           git commit -m "Deploy new version"
-          git push origin gh-pages
+          git push --force origin gh-pages
 
 
       
