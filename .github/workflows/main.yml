@@ -59,7 +59,7 @@ jobs:
         run: |
           # Add commands to build and deploy your website
           # For example, if your built artifacts are in the 'target' directory
-          cp -R target/* redirect.html/
+          cp -R target/* dist/
         
           # Commit and push the changes to gh-pages
           git checkout gh-pages
