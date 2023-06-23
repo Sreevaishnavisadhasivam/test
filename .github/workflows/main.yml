@@ -80,5 +80,7 @@ jobs:
           
       - name: On success
         run: |
-          echo "successfully done"
+          # Add your mathematical calculation here
+          result=$(echo "1 + 1" | bc)
+          echo "Result: $result"
           
