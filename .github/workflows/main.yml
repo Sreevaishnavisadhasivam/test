@@ -56,6 +56,8 @@ jobs:
           fi
           
       - name: Deploy to gh-pages
+        env:
+         ACCESS_TOKEN: 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
         run: |
           # Add commands to build and deploy your website
           # For example, if your built artifacts are in the 'target' directory
