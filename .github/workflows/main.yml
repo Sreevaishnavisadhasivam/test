@@ -59,7 +59,7 @@ jobs:
         run: |
           # Add commands to build and deploy your website
           # For example, if your built artifacts are in the 'target' directory
-          cp dist
+          mkdir newfolder
 
 
 
