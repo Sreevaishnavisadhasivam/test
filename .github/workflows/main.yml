@@ -80,8 +80,9 @@ jobs:
           
       - name: Open website
         run: |
-          # Install Puppeteer
-          npm install puppeteer@14.6.0 --unsafe-perm
+          # Install a headless browser, for example, Google Chrome
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
-          # Launch a headless Chrome browser and open the website
-          npx puppeteer --no-sandbox --disable-setuid-sandbox -c "await page.goto('https://example.com');"
+          # Launch the headless Chrome browser and open the website
+          google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 https://example.com
